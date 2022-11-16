@@ -12,13 +12,12 @@ public class PigControl : MonoBehaviour
 
     public bool IsAlive;
     public bool SideChangeble = true;
-    public int MaxHeight;
-    
-    [SerializeField] private float _speed;
+    [HideInInspector] public int MaxHeight;
+    [HideInInspector] public Vector2 _velocity;
 
+    [SerializeField] private float _speed;
     private float _horizontal;
-    public Vector2 _velocity;
-    
+
     private void Awake()
     {
         _pigRigidbody = GetComponent<Rigidbody2D>();
@@ -36,9 +35,9 @@ public class PigControl : MonoBehaviour
             _horizontal = Input.acceleration.x * _speed;
 
             //change side when going out of screen
-            if (transform.position.x > 2.6f)
+            if (transform.position.x > 2.6f && _pigSprite.flipX == true)
                 transform.position = new Vector3(-transform.position.x, transform.position.y, transform.position.z);
-            else if (transform.position.x < -2.6f)
+            else if (transform.position.x < -2.6f && _pigSprite.flipX != true)
                 transform.position = new Vector3(-transform.position.x, transform.position.y, transform.position.z);
 
         //Set Max Height 

@@ -11,16 +11,11 @@ public class Wings : BaseTools
     }
     private IEnumerator EquippedWings(GameObject pig)
     {
-            var _pig = pig.gameObject.GetComponent<PigControl>();
-            _pig.SideChangeble = false;
-
-
-            this.gameObject.transform.SetParent(pig.transform, true);
-            this.gameObject.transform.localPosition = new Vector2(pig.transform.localPosition.x + 7, pig.transform.localPosition.y + 9);
-
-            yield return new WaitForSeconds(3);
-            _pig.SideChangeble = true;
-            Destroy(this.gameObject);
+        this.gameObject.transform.SetParent(pig.transform, true);
+        this.gameObject.transform.localScale = new Vector2(4, 4);
+        this.gameObject.transform.localPosition = new Vector2(pig.transform.localPosition.x, pig.transform.localPosition.y);
+        yield return new WaitForSeconds(3);
+        Destroy(this.gameObject);
             
     }
 }

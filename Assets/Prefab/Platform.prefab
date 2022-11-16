@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 7808408893257115550}
   - component: {fileID: 7808408893257115545}
   - component: {fileID: 7808408893257115546}
-  - component: {fileID: -3895913759184490739}
   - component: {fileID: -2252823092065644138}
-  - component: {fileID: 8889914373163157995}
+  - component: {fileID: -3895913759184490739}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Platform
@@ -130,19 +129,6 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
---- !u!114 &-3895913759184490739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7808408893257115536}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2195dbaf5b791f34ca7b257f73805663, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PushPower: 6
 --- !u!82 &-2252823092065644138
 AudioSource:
   m_ObjectHideFlags: 0
@@ -239,24 +225,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!50 &8889914373163157995
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!114 &-3895913759184490739
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7808408893257115536}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 2
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2195dbaf5b791f34ca7b257f73805663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PushPower: 6

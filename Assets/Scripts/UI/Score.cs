@@ -15,8 +15,7 @@ public class Score : MonoBehaviour
     }
     public void AddScore()
     {
-        int score;
-        score = _pig.MaxHeight;
+        int score = _pig.MaxHeight;
 
         if(score > BestScore)
             BestScore = score;

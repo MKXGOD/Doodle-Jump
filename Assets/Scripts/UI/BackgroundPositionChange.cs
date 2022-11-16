@@ -5,7 +5,7 @@ public class BackgroundPositionChange : MonoBehaviour
     [SerializeField]private SpriteRenderer _sprite;
     [SerializeField]private GameObject _pig;
 
-    public float _positionY;
+    private float _positionY;
 
     private void Awake()
     {

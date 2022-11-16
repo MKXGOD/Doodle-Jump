@@ -17,9 +17,9 @@ public class Spawner : MonoBehaviour
     }
     private void OnHeightChangedGeneratePlatform()
     {
-        GeneratePlatforms(3, _platformPrefab[0]);
+        GeneratePlatforms(1, _platformPrefab[0]);
 
-        if(_pigControl.MaxHeight % 20 == 1)
+        if(_pigControl.MaxHeight % 50 == 1)
             GeneratePlatforms(10, _platformPrefab[2]);
     }
     private void GeneratePlatforms(int platformCount, GameObject prefab)
