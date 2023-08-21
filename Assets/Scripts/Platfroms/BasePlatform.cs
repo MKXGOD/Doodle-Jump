@@ -25,10 +25,8 @@ public abstract class BasePlatform : MonoBehaviour
     {
         _soundEffect.Play();
         var target = other.gameObject;
-        Rigidbody2D rb = target.GetComponent<Rigidbody2D>();
-        Vector2 velocity = rb.velocity;
-        velocity.y = PushPower;
-        rb.velocity = velocity;
+        target.TryGetComponent<PigControl>(out PigControl pig);
+        pig.Jump(PushPower);
     }
 
     protected IEnumerator PlatformMove(GameObject _platform, float xMin, float xMax )
@@ -42,7 +40,6 @@ public abstract class BasePlatform : MonoBehaviour
             if (_platform != null)
             {
                 Vector2 _tempPosition = (Vector2)_platform.transform.position;
-
                 if (_toStop)
                 {
                     _tempPosition = Vector2.MoveTowards(_tempPosition, _rightEdgePosition, 1 * Time.deltaTime);

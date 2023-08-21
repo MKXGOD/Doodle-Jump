@@ -10,7 +10,8 @@ public class PigControl : MonoBehaviour
     private BoxCollider2D _pigBoxCollider;
     private Animator _pigAnimator;
 
-    public bool IsAlive;
+    private bool _isAlive;
+    public bool IsAlive => _isAlive;
     public bool SideChangeble = true;
     [HideInInspector] public int MaxHeight;
     [HideInInspector] public Vector2 _velocity;
@@ -25,7 +26,7 @@ public class PigControl : MonoBehaviour
         _pigBoxCollider = GetComponent<BoxCollider2D>();
         _pigAnimator = GetComponent<Animator>();
 
-        IsAlive = true;
+        PigState(true);
     }
     private void Update()
     {
@@ -34,21 +35,47 @@ public class PigControl : MonoBehaviour
         else if (Application.isPlaying)
             _horizontal = Input.acceleration.x * _speed;
 
-            //change side when going out of screen
-            if (transform.position.x > 2.6f && _pigSprite.flipX == true)
-                transform.position = new Vector3(-transform.position.x, transform.position.y, transform.position.z);
-            else if (transform.position.x < -2.6f && _pigSprite.flipX != true)
-                transform.position = new Vector3(-transform.position.x, transform.position.y, transform.position.z);
+        //change side when going out of screen
+        FlightToTheOppoiteSide();
 
-        //Set Max Height 
+        SetMaxHeight();
+        Fly();
+        ChangingSpriteDirection();
+    }
+    private void FixedUpdate()
+    {
+        _velocity = _pigRigidbody.velocity;
+        _velocity.x = _horizontal;
+        _pigRigidbody.velocity = _velocity;
+    }
+    public void Jump(float pushPower)
+    {
+        _velocity.y = pushPower;
+        _pigRigidbody.velocity = _velocity;
+    }
+    public void PigState(bool state)
+    { 
+        _isAlive = state;
+    }
+    private void FlightToTheOppoiteSide()
+    {
+        if (transform.position.x > 2.6f && _pigSprite.flipX == true)
+            transform.position = new Vector3(-transform.position.x, transform.position.y, transform.position.z);
+        else if (transform.position.x < -2.6f && _pigSprite.flipX != true)
+            transform.position = new Vector3(-transform.position.x, transform.position.y, transform.position.z);
+    }
+    private void SetMaxHeight()
+    {
         if ((int)transform.position.y > MaxHeight)
         {
             MaxHeight = (int)transform.position.y;
             HeightChanged?.Invoke();
         }
-
+    }
+    private void Fly()
+    {
         //Collider stops working during takeoff
-        if (Fly() == true)
+        if (IsFlying())
         {
             _pigAnimator.SetBool("_isJumping", true);
             _pigBoxCollider.enabled = false;
@@ -58,25 +85,13 @@ public class PigControl : MonoBehaviour
             _pigAnimator.SetBool("_isJumping", false);
             _pigBoxCollider.enabled = true;
         }
-
-        ChangingSpriteDirection();
     }
-    public void FixedUpdate()
-    {
-        _velocity = _pigRigidbody.velocity;
-        _velocity.x = _horizontal;
-        _pigRigidbody.velocity = _velocity;
-    }
-    public bool Fly()
+    private bool IsFlying()
     {
         if (_velocity.y > 1)
-        {
             return true;
-        }
         else if (_velocity.y < 1)
-        {
             return false;
-        }
 
         return default;
     }

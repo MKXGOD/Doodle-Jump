@@ -10,9 +10,9 @@ public class Shreder : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Player")
         {
-            var _pig = collision.gameObject;
-            PigControl _pigcontrol = _pig.GetComponent<PigControl>();
-            _pigcontrol.IsAlive = false;
+            var target = collision.gameObject;
+            target.TryGetComponent<PigControl>(out PigControl pig);
+            pig.PigState(false);
         }
     }
 }
